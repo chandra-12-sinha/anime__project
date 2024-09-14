@@ -12,7 +12,9 @@ const GlobalStyle = createGlobalStyle`
     }
     
     body {
-        background-color:pink;
+        // background-color:pink;
+        color:#6c7983;
+        font-size:1.2rem;
     }`;
 
     export default GlobalStyle;
