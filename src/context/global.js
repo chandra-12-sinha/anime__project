@@ -94,13 +94,20 @@ export const GlobalContextProvider = ({ children }) => {
     dispatch({ type: GET_AIRING_ANIME, payload: data.data });
   };
 
+  /// fetch airing anime
+
+  const getAiringAnime = async()=>{
+    dispatch({type: LOADING});
+    const response = await fetch(`${baseUrl}/top/anime?filter=airing`);
+    const data = await response.json();
+    dispatch({type: GET_AIRING_ANIME, payload: data.data})
+  }
+
   //// search anime
 
   const searchAnime = async (anime) => {
     dispatch({ type: LOADING });
-    const response = await fetch(
-      `${baseUrl}/search/anime?q=${anime}&order_by=popularity&sort=asc&sfw`
-    );
+    const response = await fetch(`${baseUrl}/anime?q=${anime}&order_by=popularity&sort=asc&sfw`);
     const data = await response.json();
 
     dispatch({ type: SEARCH, payload: data.data });
@@ -117,6 +124,10 @@ export const GlobalContextProvider = ({ children }) => {
         handleSubmit,
         searchAnime,
         search,
+        getPopularAnime,
+       getAiringAnime,
+        getUpcomingAnime
+
       }}
     >
       {children}
