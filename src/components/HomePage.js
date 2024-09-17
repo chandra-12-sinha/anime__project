@@ -3,6 +3,9 @@ import { useGlobalContext } from "../context/global"
 import Popular from "./Popular";
 import Upcoming from "./Upcoming";
 import styled from "styled-components";
+// import airing from "./airing";
+import Airing from "./airing";
+
 
 
 function HomePage() {
@@ -16,7 +19,7 @@ function HomePage() {
           return <Popular rendered={rendered}/>
 
           case 'airing':
-            return <Popular rendered={rendered}/>
+          return <Airing/>
 
             case 'upcoming':
               return <Upcoming rendered={rendered}/>
