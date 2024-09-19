@@ -32,7 +32,7 @@ function HomePage() {
   return (
    <HomepageStyle>
       <header>
-      <div>
+      <div className="logo">
         <h1>
           {
             rendered === 'popular' ? 'Popular Anime' :
@@ -48,7 +48,7 @@ function HomePage() {
               getPopularAnime();
             }}>Popular<i className="fa-solid fa-fire"></i> </button>
           </div>
-          <form action="" className='search=form' onSubmit={handleSubmit}>
+          <form action="" className='search-form' onSubmit={handleSubmit}>
             <div className="input-control">
               <input type="text" placeholder="Search Anime..." value={search} onChange={handleChange}/>
               <button type="submit">Search</button> 
@@ -86,6 +86,10 @@ const HomepageStyle = styled.div`
         width: 60%;
         margin: 0 auto;
         transition: all .4s ease-in-out;
+        //  @media screen and (max-width:1530px) {
+        //     width: 95%;
+
+
         .logo {
             display: flex;
             align-items: center;

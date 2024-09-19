@@ -123,7 +123,7 @@ function AnimeItem() {
 
       <h3 className="title">Trailer</h3>
       <div className="trailer-con">
-        {trailer?.embed_url &&
+        {trailer?.embed_url ? 
         <iframe
           src={trailer?.embed_url}
           title="Inline frame example"
@@ -132,13 +132,18 @@ function AnimeItem() {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen>
 
-          </iframe>}
-      </div>
-      <h3 className="title">Characters</h3>
+          </iframe>:
+          <h3>Trailor not available</h3>
+           }
+           </div>
+    
+      <h3 className="title">Characters</h3> 
       <div className="characters">{
         characters?.map((character, i)=>{
           const{role}= character;
           const {images, name, mal_id} = character.character;
+         
+         
           return(
            <Link to={`/character/${mal_id}`}key={i} >
             <div className="character">
