@@ -19,7 +19,7 @@ function HomePage() {
           return <Popular rendered={rendered}/>
 
           case 'airing':
-          return <Airing/>
+          return <Airing rendered={rendered}/>
 
             case 'upcoming':
               return <Upcoming rendered={rendered}/>
@@ -46,15 +46,14 @@ function HomePage() {
             <button onClick={()=>{
               setRendered('popular')
               getPopularAnime();
-            }}>Popular</button>
+            }}>Popular<i class="fa-solid fa-fire"></i> </button>
           </div>
           <form action="" className='search=form' onSubmit={handleSubmit}>
             <div className="input-control">
               <input type="text" placeholder="Search Anime..." value={search} onChange={handleChange}/>
               <button type="submit">Search</button> 
+            </div>
               <div className="search-results"></div>
-
-              </div>
               </form>
 
               <div className="filter-btn airing-filter">

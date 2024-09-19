@@ -16,7 +16,7 @@ const SEARCH = "SEARCH";
 const GET_POPULAR_ANIME = "GET_POPULAR_ANIME";
 const GET_UPCOMING_ANIME = "GET_UPCOMING_ANIME";
 const GET_AIRING_ANIME = "GET_AIRING_ANIME";
-
+const GET_PICTURES = "GET_PICTURES";
 //REDUCER
 const reducer = (state, action) => {
   switch (action.type) {
@@ -30,7 +30,8 @@ const reducer = (state, action) => {
       return { ...state, upcomingAnime: action.payload, loading: false };
     case GET_AIRING_ANIME:
       return { ...state, airingAnime: action.payload, loading: false };
-
+    case GET_PICTURES:
+      return{...state, pictures:action.payload, loading:false};
     default:
       return state;
   }
@@ -89,9 +90,9 @@ export const GlobalContextProvider = ({ children }) => {
   const getUpcomingAnime = async () => {
     dispatch({ type: LOADING });
 
-    const response = await fetch(`${baseUrl}/top/anime?filter=airing`);
+    const response = await fetch(`${baseUrl}/top/anime?filter=upcoming`);
     const data = await response.json();
-    dispatch({ type: GET_AIRING_ANIME, payload: data.data });
+    dispatch({ type: GET_UPCOMING_ANIME, payload: data.data });
   };
 
   /// fetch airing anime
@@ -112,6 +113,14 @@ export const GlobalContextProvider = ({ children }) => {
 
     dispatch({ type: SEARCH, payload: data.data });
   };
+  ////get anime picture
+
+  const getAnimePictures = async(id)=>{
+    dispatch({LOADING});
+    const response = await fetch(`${baseUrl}/characters/${id}/pictures`);
+    const data = await response.json();
+    dispatch({type: GET_PICTURES, payload:data.data})
+  }
 
   useEffect(() => {
     getPopularAnime();
@@ -126,7 +135,8 @@ export const GlobalContextProvider = ({ children }) => {
         search,
         getPopularAnime,
        getAiringAnime,
-        getUpcomingAnime
+        getUpcomingAnime,
+        getAnimePictures
 
       }}
     >

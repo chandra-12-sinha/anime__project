@@ -5,35 +5,46 @@ import { Link } from 'react-router-dom';
 
 function Upcoming({rendered}) {
 
-    const {UpcomingAnime, isSearch, searchResults} = useGlobalContext();
-    // console.log(UpcomingAnime);
+    const {upcomingAnime, isSearch, searchResults} = useGlobalContext();
+    console.log(upcomingAnime);
 
     const conditionalRender = ()=>{
         if(!isSearch && rendered === 'upcoming'){
-            return UpcomingAnime.map((anime)=>{
-                console.log(anime);
+            return upcomingAnime?.map((anime)=>{
+                // console.log(anime);
                 return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
 
                     <img src={anime.images.jpg.large_image_url} alt=''/>
                 </Link>
                 
             })
+        }else {
+          return searchResults?.map((anime)=>{
+            return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
+              <img src={anime.images.jpg.large_image_url} alt=''/>
+            </Link>
+          })
         }
     }
+    // console.log(searchResults);
     
   return (
-    <div>
+    
       <PopularStyled>
 
         <div className='upcoming-anime'>
-            {conditionalRender}
+            {conditionalRender()}
         </div>
       </PopularStyled>
-    </div>
+    
   )
 }
 
 export default Upcoming;
+
+
+
+
 const PopularStyled = styled.div`
   display: flex;
     .upcoming-anime {
